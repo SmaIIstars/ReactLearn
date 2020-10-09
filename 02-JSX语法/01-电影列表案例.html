@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="App"></div>
+    <!-- 添加依赖 -->
+    <!-- crossorigin: 将跨域脚本的错误显示出来 -->
+    <script
+      src="https://unpkg.com/react@16/umd/react.production.min.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <!-- 开发 -->
+    <script type="text/babel">
+      class App extends React.Component {
+        constructor() {
+          super();
+
+          this.state = {
+            message: "Hello World",
+            movies: ["大话西游", "盗梦空间", "流浪地球", "星际穿越"],
+          };
+        }
+
+        render() {
+          const liArray = [];
+          for (let movie of this.state.movies) {
+            liArray.push(<li>{movie}</li>);
+          }
+
+          return (
+            <div>
+              <h2>电影列表1</h2>
+              <ul>{liArray}</ul>
+
+              <h2>电影列表2</h2>
+              <ul>
+                {this.state.movies.map((movie) => (
+                  <li>{movie}</li>
+                ))}
+              </ul>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<App />, document.getElementById("App"));
+    </script>
+  </body>
+</html>

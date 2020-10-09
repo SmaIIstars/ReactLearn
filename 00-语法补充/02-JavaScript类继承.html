@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Person {
+        constructor(name, age) {
+          this.name = name;
+          this.age = age;
+        }
+
+        running() {
+          console.log("running");
+        }
+      }
+
+      // class Student {
+      //   constructor(name, age, sno) {
+      //     this.name = name;
+      //     this.age = age;
+      //     this.sno = sno;
+      //   }
+      // }
+
+      // class Teacher {
+      //   constructor(name, age, id) {
+      //     this.name = name;
+      //     this.age = age;
+      //     this.id = id;
+      //   }
+      // }
+
+      class Student extends Person {
+        constructor(name, age, sno) {
+          super(name, age);
+          this.sno = sno;
+        }
+      }
+
+      const stu = new Student("Stars", 18, 110);
+      console.log(stu.name, stu.age, stu.sno);
+      stu.running();
+
+      class Teacher extends Person {
+        constructor(name, age, id) {
+          super(name, age);
+          this.id = id;
+        }
+      }
+
+      const teacher = new Student("Angel", 28, 111);
+      console.log(teacher.name, teacher.age, teacher.sno);
+      teacher.running();
+    </script>
+  </body>
+</html>

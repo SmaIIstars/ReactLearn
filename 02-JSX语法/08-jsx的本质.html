@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React</title>
+  </head>
+
+  <body>
+    <div id="App"></div>
+
+    <!--引入-->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js "
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js "></script>
+
+    <!--开发-->
+    <script type="text/babel">
+      // jsx语法糖
+      const message1 = <h2>React</h2>;
+      // createElement(component, props, ...children)
+      const message2 = React.createElement("h2", null, "React");
+
+      // React: jsx -> createElement函数 -> ReactElement(对象树) -> React.render() -> 真实DOM
+      // React-native: jsx -> createElement函数 -> ReactElement(对象树) -> React.render() -> 原生控件
+
+      const element = <div>{message1}</div>;
+
+      ReactDOM.render(element, document.getElementById("App"));
+    </script>
+  </body>
+</html>

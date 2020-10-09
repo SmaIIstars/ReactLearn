@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 定义生成器
+      function* foo() {
+        console.log(1);
+        yield "Hello";
+        console.log(2);
+        yield "World";
+        console.log(3);
+        yield "Smallstars";
+        console.log(4);
+      }
+
+      // 使用迭代器
+      // const it = foo();
+      // console.log(it);
+
+      // console.log(it.next());
+      // console.log(it.next());
+      // console.log(it.next());
+      // console.log(it.next());
+
+      // generator+Promise
+      function* bar() {
+        console.log("发起网络请求");
+        // 先在 yield 截断，下一次 next() 再进行赋值
+        const data = yield new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve("Data");
+          }, 3000);
+        });
+
+        console.log(data);
+      }
+
+      // 拿到迭代器
+      const it = bar();
+      // 先拿到promise
+      it.next().value.then((res) => {
+        console.log("请求成功,返回数据");
+        // 网络请求成功后再进行后面的代码
+        it.next(res);
+      });
+    </script>
+  </body>
+</html>

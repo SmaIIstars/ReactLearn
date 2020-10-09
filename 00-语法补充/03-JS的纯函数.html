@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 1.确定的输入，确定的输出
+       * 2.不会产生任何副作用
+       */
+
+      // 纯函数
+      function sum(num1, num2) {
+        return sum1 + sum2;
+      }
+
+      sum(10, 20); // 30
+      sum(10, 20); // 30
+      sum(10, 20); // 30
+      sum(10, 20); // 30
+
+      // 纯函数(注意引用类型)
+      const foo1 = 10;
+      function add(num) {
+        return foo1 + num;
+      }
+
+      // 非纯函数
+      let foo = 10;
+      function add(num) {
+        return foo + num;
+      }
+
+      add(5); // 15
+      add(5); // 20
+    </script>
+  </body>
+</html>

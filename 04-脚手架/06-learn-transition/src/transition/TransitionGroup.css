@@ -1,0 +1,28 @@
+.item-enter,
+.item-appear {
+  opacity: 0;
+}
+
+.item-enter-active,
+.item-appear-active {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.item-enter-done,
+.item-appear-done {
+  color: red;
+}
+
+.item-exit {
+  opacity: 1;
+}
+
+.item-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
+.item-exit-done {
+  opacity: 0;
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="App"></div>
+    <!-- 添加依赖 -->
+    <!-- crossorigin: 将跨域脚本的错误显示出来 -->
+    <script
+      src="https://unpkg.com/react@16/umd/react.production.min.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <!-- 开发 -->
+    <script type="text/babel">
+      class App extends React.Component {
+        constructor() {
+          super();
+
+          this.state = {
+            isLogin: true,
+          };
+        }
+
+        render() {
+          const { isLogin } = this.state;
+
+          const titleDisplayValue = isLogin ? "block" : "none";
+
+          // 1.if-else
+          let btnText = null;
+          let welcome = null;
+          if (isLogin) {
+            welcome = <h2>欢迎回来</h2>;
+            btnText = "退出";
+          } else {
+            welcome = <h2>请先登录</h2>;
+            btnText = "登录";
+          }
+
+          return (
+            <div>
+              {welcome}
+              {/*<button>{btnText}</button>*/}
+              <button
+                onClick={(e) => {
+                  this.loginClick();
+                }}
+              >
+                {isLogin ? "退出" : "登录"}
+              </button>
+
+              <hr />
+
+              <h2>v-if效果实现</h2>
+              {/*2.三元运算符*/}
+              <h2>{isLogin ? "Smallstars 你好啊" : null}</h2>
+              {/*3.逻辑与*/}
+              <h2>{isLogin && "Smallstars 你好啊"}</h2>
+
+              <hr />
+              <h2>v-show效果实现</h2>
+              <h2 style={{ display: titleDisplayValue }}>
+                {isLogin && "Smallstars 你好啊"}
+              </h2>
+            </div>
+          );
+        }
+
+        loginClick() {
+          this.setState({
+            isLogin: !this.state.isLogin,
+          });
+        }
+      }
+
+      ReactDOM.render(<App />, document.getElementById("App"));
+    </script>
+  </body>
+</html>

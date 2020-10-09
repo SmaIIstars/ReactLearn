@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="App"></div>
+    <!-- 添加依赖 -->
+    <!-- crossorigin: 将跨域脚本的错误显示出来 -->
+    <script
+      src="https://unpkg.com/react@16/umd/react.production.min.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <!-- 开发 -->
+    <script type="text/babel">
+      function getSizeImage(imgUrl, size) {
+        return imgUrl + `?param=${size}x${size}`;
+      }
+
+      class App extends React.Component {
+        constructor() {
+          super();
+
+          this.state = {
+            title: "标题",
+            imgUrl:
+              "http://p1.music.126.net/Q7ylOqSKZxG63_3sARpgkg==/109951165340879562.jpg",
+            link: "http://www.baidu.com",
+            active: true,
+          };
+        }
+
+        render() {
+          const { title, imgUrl, link, active } = this.state;
+
+          return (
+            <div>
+              {/*绑定普通属性*/}
+              <h2 title={title}>我是标题</h2>
+              <img src={getSizeImage(imgUrl, 140)} alt="" />
+              <a href={link} target="_blank">
+                百度一下
+              </a>
+
+              {/*绑定class*/}
+              <div className="box title">我是div</div>
+              <div className={"box title " + (active ? "active" : "")}>
+                我是div1
+              </div>
+              <label htmlFor=""></label>
+
+              {/*绑定style*/}
+              <div style={{ color: "red", fontSize: "50px" }}>
+                我是div2，绑定style
+              </div>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<App />, document.getElementById("App"));
+    </script>
+  </body>
+</html>

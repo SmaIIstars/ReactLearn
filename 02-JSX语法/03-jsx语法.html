@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="App"></div>
+    <!-- 添加依赖 -->
+    <!-- crossorigin: 将跨域脚本的错误显示出来 -->
+    <script
+      src="https://unpkg.com/react@16/umd/react.production.min.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <!-- 开发 -->
+    <script type="text/babel">
+      const obj = {
+        name: "Stars",
+        age: 21,
+        movies: ["1", "3", "2"],
+
+        // 不显示
+        test1: null,
+        test2: undefined,
+        test3: true,
+
+        // jsx不支持对象
+        friend: {
+          name: "Angel",
+          age: 18,
+        },
+      };
+
+      // jsx语法
+      const element = (
+        <div>
+          {/*jsx注释*/}
+          <h2>HelloWorld</h2>
+          <h2>{obj.name}</h2>
+          <h2>{obj.age}</h2>
+          <h2>{obj.movies}</h2>
+          <h2>{obj.test1}</h2>
+          <h2>{obj.test2}</h2>
+          <h2>{obj.test3}</h2>
+          {/*<h2>{obj.friend}</h2>*/}
+        </div>
+      );
+
+      ReactDOM.render(element, document.getElementById("App"));
+    </script>
+  </body>
+</html>

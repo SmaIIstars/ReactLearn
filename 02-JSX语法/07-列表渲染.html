@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="App"></div>
+    <!-- 添加依赖 -->
+    <!-- crossorigin: 将跨域脚本的错误显示出来 -->
+    <script
+      src="https://unpkg.com/react@16/umd/react.production.min.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <!-- 开发 -->
+    <script type="text/babel">
+      class App extends React.Component {
+        constructor() {
+          super();
+
+          this.state = {
+            name: ["abc", "de", "fgh", "ij"],
+            nunmbers: [0, 312, 651, 984, 987, 654, 3123, 51],
+          };
+        }
+
+        render() {
+          return (
+            <div>
+              <h2>名字列表</h2>
+              <ul>
+                {this.state.name.map((item) => {
+                  return <li>{item}</li>;
+                })}
+              </ul>
+
+              <h2>数字列表</h2>
+              <ul>
+                {this.state.nunmbers
+                  .filter((item) => {
+                    return item >= 500;
+                  })
+                  .map((item) => (
+                    <li>{item}</li>
+                  ))}
+              </ul>
+
+              <h2>列表截取</h2>
+              {this.state.nunmbers.slice(0, 4).map((item) => {
+                return <li>{item}</li>;
+              })}
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<App />, document.getElementById("App"));
+    </script>
+  </body>
+</html>
