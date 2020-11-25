@@ -10,7 +10,7 @@ class Cpn extends Component {
   }
 
   /**
-   * 1.清除操作
+   * 1.取消挂载
    */
   componentWillUnmount() {
     console.log("执行componentWillUnmount函数");

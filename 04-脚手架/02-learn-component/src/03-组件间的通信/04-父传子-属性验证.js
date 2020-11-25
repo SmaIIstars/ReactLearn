@@ -11,7 +11,7 @@ function ChildCpn(props) {
       <h2>子组件展示数据:{name + " " + age + " " + height}</h2>
       <div>
         {names.map((item, index) => {
-          return <li>{item}</li>;
+          return <li key={index}>{item}</li>;
         })}
       </div>
     </div>
@@ -20,15 +20,6 @@ function ChildCpn(props) {
 
 // 类组件验证
 class ChildCpn2 extends Component {
-  // constructor() {
-  //   super();
-  //   console.log(this.props);
-  // }
-
-  // componentWillMount() {
-  //   console.log(this.props);
-  // }
-
   static propTypes = {};
   static defaultProps = {};
 
@@ -40,7 +31,7 @@ class ChildCpn2 extends Component {
         <h2>Cpn2子组件展示数据:{name + " " + age + " " + height}</h2>
         <div>
           {names.map((item, index) => {
-            return <li>{item}</li>;
+            return <li key={index}>{item}</li>;
           })}
         </div>
       </div>
@@ -56,9 +47,23 @@ ChildCpn.propTypes = {
   names: Proptypes.array,
 };
 
+ChildCpn2.propTypes = {
+  name: Proptypes.string,
+  age: Proptypes.number,
+  height: Proptypes.number,
+  names: Proptypes.array,
+};
+
 // 默认值
 ChildCpn.defaultProps = {
   name: "HelloKitty",
+  age: 30,
+  height: 1.78,
+  names: ["defalut"],
+};
+
+ChildCpn2.defaultProps = {
+  name: "BlackAngel",
   age: 30,
   height: 1.78,
   names: ["defalut"],
@@ -74,13 +79,10 @@ export default class App extends Component {
           height={1.83}
           names={["abc", "de"]}
         />
+
         <ChildCpn />
-        <ChildCpn2
-          name="Smallstars"
-          age={18}
-          height={1.83}
-          names={["abc", "de"]}
-        />
+
+        <ChildCpn2 age={18} height={1.83} names={["abc", "de"]} />
       </div>
     );
   }
