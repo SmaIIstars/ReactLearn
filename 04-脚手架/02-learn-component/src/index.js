@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import App from "./10-组件内容补充/02-porttals的使用";
+import App from "./03-组件间的通信/05-子传夫-函数传递";
 
 import "./css/index.css";
 
