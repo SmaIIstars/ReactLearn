@@ -13,7 +13,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <h2>当前数字: {this.state.counter}</h2>
+        <h2>Number: {this.state.counter}</h2>
         <button
           onClick={(e) => {
             this.increment();
@@ -26,21 +26,22 @@ export default class App extends Component {
   }
 
   increment() {
-    // 每次都会合并，后面会覆盖前面
+    // It is merged each time, and the front is covered by later
     // this.setState({
     //   counter: this.state.counter + 1,
     // });
 
     // this.setState({
-    //   counter: this.state.counter + 2,
+    //   counter: this.state.counter + 1,
     // });
 
     // this.setState({
-    //   counter: this.state.counter + 3,
+    //   counter: this.state.counter + 1,
     // });
+    // couter is 1
 
-    // 合并时进行累加
-    // 每次合并的时候使用上一次的 state 进行累加，然后返回新的
+    //Accumulate when meraging
+    // Each time a meraging is made, the later state is used for accumulation, and then a new one is returned
     this.setState((prevState, props) => {
       return {
         counter: prevState.counter + 1,
@@ -56,5 +57,6 @@ export default class App extends Component {
         counter: prevState.counter + 1,
       };
     });
+    // couter is 3
   }
 }

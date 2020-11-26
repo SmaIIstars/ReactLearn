@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import App from "./03-组件间的通信/05-子传夫-函数传递";
+import App from "./05-setState的使用/02-setState同步更新";
 
 import "./css/index.css";
 

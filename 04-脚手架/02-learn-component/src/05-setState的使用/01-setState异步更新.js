@@ -1,51 +1,48 @@
 import React, { Component } from "react";
 
-export default class App extends Component {
-  constructor(props) {
+class App extends Component {
+  constructor() {
     super();
-    this.props = props;
 
     this.state = {
-      message: "默认文本",
+      message: "default Text",
     };
   }
 
+  // Call back after the render function is executed
+  componentDidUpdate() {
+    console.log("componentDidUpdate", this.state.message); // Smallstars
+  }
+
+  changeText() {
+    this.setState(
+      {
+        message: "Smallstars",
+      },
+      () => {
+        // Call back after the datas are updated
+        console.log("changeText", this.state.message); // Smallstars
+      }
+    );
+
+    console.log("changeText", this.state.message); // default Text
+  }
+
   render() {
+    const { message } = this.state;
     return (
       <div>
-        <h2>当前文本: {this.state.message}</h2>
+        <div>{message}</div>
         <button
-          onClick={(e) => {
+          onClick={() => {
             this.changeText();
           }}
         >
-          更改文本
+          synchronous
         </button>
       </div>
     );
   }
-
-  // 2.render执行完回调 componentDidUpdate 函数
-  componentDidUpdate() {
-    console.log(this.state.message);
-  }
-
-  changeText() {
-    // // setState异步更新
-    // this.setState({
-    //   message: "你好啊",
-    // });
-    // console.log(this.state.message); // 默认文本
-
-    // 获取异步更新后的数据
-    // 1.回调函数: setState(更新的state, callback)
-    this.setState(
-      {
-        message: "你好啊",
-      },
-      () => {
-        console.log(this.state.message);
-      }
-    );
-  }
 }
+
+export default App;

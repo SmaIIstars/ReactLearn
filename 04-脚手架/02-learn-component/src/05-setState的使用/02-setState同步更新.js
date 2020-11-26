@@ -1,54 +1,59 @@
 import React, { Component } from "react";
 
-export default class App extends Component {
-  constructor(props) {
+class App extends Component {
+  constructor() {
     super();
-    this.props = props;
 
     this.state = {
-      message: "默认文本",
+      message: "default Text",
     };
   }
 
-  render() {
-    return (
-      <div>
-        <h2>当前文本: {this.state.message}</h2>
-        <button
-          onClick={(e) => {
-            this.changeText();
-          }}
-        >
-          更改文本
-        </button>
-
-        <button id="btn">更改文本2</button>
-      </div>
-    );
-  }
-
   componentDidMount() {
-    // 在原生 DOM 事件中
-    document.getElementById("btn").addEventListener("click", () => {
+    document.getElementById("btn_synchronous").addEventListener("click", () => {
       this.setState({
-        message: "你好啊",
+        message: "Smallstars",
       });
-      console.log(this.state.message);
+
+      console.log("document", this.state.message); // Smallstars
     });
 
     // this.setState({
-    //   message: "你好啊",
+    //   message: "Smallstars",
     // });
-    // console.log(this.state.message);
+    // console.log("componentDidMount", this.state.message); // default Text
   }
 
   changeText() {
-    // 将 setState 放入定时器中
     setTimeout(() => {
       this.setState({
-        message: "你好啊",
+        message: "Smallstars",
       });
-      console.log(this.state.message);
+      console.log("setTimeout", this.state.message); // default Text
     }, 0);
+
+    this.setState({
+      message: "Smallstars",
+    });
+    console.log("changeText", this.state.message); // default Text
+  }
+
+  render() {
+    const { message } = this.state;
+    return (
+      <>
+        <div>message: {message}</div>
+        <button id="btn_synchronous">synchronous</button>
+        <button
+          onClick={() => {
+            this.changeText();
+          }}
+        >
+          synchronous
+        </button>
+      </>
+    );
   }
 }
+
+export default App;
