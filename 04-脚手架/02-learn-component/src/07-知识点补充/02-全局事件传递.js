@@ -2,25 +2,25 @@ import React, { PureComponent } from "react";
 
 import { EventEmitter } from "events";
 
-// 事件总线: event bus
+// Event bus
 const eventBus = new EventEmitter();
 
 class Home extends PureComponent {
-  // 添加监听
+  // addListener
   componentDidMount() {
-    // console.log(1);
     eventBus.addListener("btnClick", this.handleBtnClickListener);
   }
 
-  // 取消监听
+  // removeListener
   componentWillUnmount() {
-    // 取消所有关于 btnClick 的事件监听
+    // remove all event listener about btnClick
     // eventBus.removeListener("btnClick")
-    // console.log(1);
+
+    // Only one needs to be cancelled separately
+    // and there use the ... operator
     eventBus.removeListener("btnClick", this.handleBtnClickListener);
   }
 
-  // 单独取消某一个就需要单独拿出来
   handleBtnClickListener = (message, num) => {
     console.log(message, num);
   };
@@ -40,14 +40,14 @@ class Profile extends PureComponent {
             this.btnClick();
           }}
         >
-          点击了profile按钮
+          Click
         </button>
       </div>
     );
   }
 
   btnClick() {
-    // 发射事件
+    // emit the event
     eventBus.emit("btnClick", "HelloWorld", 123);
   }
 }
