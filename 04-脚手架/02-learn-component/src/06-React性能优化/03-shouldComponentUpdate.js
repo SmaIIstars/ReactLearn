@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 
 export default class App extends Component {
-  constructor(props) {
+  constructor() {
     super();
-
-    this.props = props;
 
     this.state = {
       counter: 0,
@@ -38,6 +36,7 @@ export default class App extends Component {
 
   // 是否阻断更新
   shouldComponentUpdate(nextProps, nextState) {
+    console.log("nextState", nextState);
     if (this.state.counter !== nextState.counter) return true;
     return false;
   }
@@ -50,7 +49,7 @@ export default class App extends Component {
 
   changeText() {
     this.setState({
-      message: "Hello React",
+      message: "Small Stars",
     });
   }
 }

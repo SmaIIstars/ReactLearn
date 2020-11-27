@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import App from "./05-setState的使用/02-setState同步更新";
+import App from "./06-React性能优化/04-PureComponent";
 
 import "./css/index.css";
 
