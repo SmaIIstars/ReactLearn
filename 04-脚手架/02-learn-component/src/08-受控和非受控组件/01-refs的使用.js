@@ -1,4 +1,11 @@
-import React, { PureComponent, createRef } from "react";
+import React, { PureComponent, createRef, forwardRef } from "react";
+
+// Can't use ref in function components, it doesn't have instance
+// Use the forwardRef HOC to enhance the function component
+const Profile = forwardRef(function (props, ref) {
+  console.log(props.name);
+  return <div ref={ref}>Profile</div>;
+});
 
 class Counter extends PureComponent {
   constructor() {
@@ -31,6 +38,7 @@ class App extends PureComponent {
     this.ref2 = createRef();
     this.ref3 = null;
     this.ref4 = createRef();
+    this.ref5 = createRef();
   }
 
   changeText() {
@@ -52,6 +60,8 @@ class App extends PureComponent {
         <div ref="ref1">DefaultText</div>
         <div ref={this.ref2}>DefaultText</div>
         <div ref={(args) => (this.ref3 = args)}>DefaultText</div>
+
+        <Profile name="profile" ref={this.ref5} />
 
         <button
           onClick={(e) => {
