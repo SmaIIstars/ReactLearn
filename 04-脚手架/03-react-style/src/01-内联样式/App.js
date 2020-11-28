@@ -22,8 +22,8 @@ export default class App extends PureComponent {
 
     return (
       <div>
-        <h2 style={{ fontSize: "50px", color: "red" }}>标题</h2>
-        <p style={pStyle}>文字描述</p>
+        <h2 style={{ fontSize: "50px", color: "red" }}>Title</h2>
+        <p style={pStyle}>Text</p>
       </div>
     );
   }

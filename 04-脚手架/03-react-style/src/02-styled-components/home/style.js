@@ -1,26 +1,24 @@
 import styled from "styled-components";
 
 export const HomeWrapper = styled.div`
-  font-size: 30px;
+  font-size: 20px;
   color: red;
 
   .banner {
     background-color: blue;
 
     span {
-      color: white;
-
-      /* 表示这两个是同级，不是父子关系 */
+      color: #fff;
       &.active {
-        color: orange;
+        color: red;
       }
 
       &:hover {
-        color: black;
+        color: green;
       }
 
       &::after {
-        content: "<--->";
+        content: "<--";
       }
     }
   }
@@ -28,5 +26,5 @@ export const HomeWrapper = styled.div`
 
 export const TitleWrapper = styled.h2`
   text-decoration: underline;
-  color: ${(props) => props.theme.themeColor};
+  font-size: 50px;
 `;

@@ -1,0 +1,31 @@
+<!--
+ * @Autor: Smallstars
+ * @Date: 2020-11-28 17:10:50
+ * @LastEditors: Smallstars
+ * @LastEditTime: 2020-11-28 17:17:59
+ * @Description: Template String
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template String</title>
+  </head>
+  <body>
+    <script>
+      const name = "SmallStars";
+      const age = 18;
+      const message = `my name is ${name}`;
+
+      function test(...args) {
+        console.log(args);
+      }
+
+      console.log(message);
+      test("aaa", "bbb");
+      test`my name is ${name}, my age is ${age}`;
+    </script>
+  </body>
+</html>
