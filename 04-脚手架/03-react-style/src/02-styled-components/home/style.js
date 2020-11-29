@@ -26,5 +26,6 @@ export const HomeWrapper = styled.div`
 
 export const TitleWrapper = styled.h2`
   text-decoration: underline;
-  font-size: 50px;
+  font-size: ${(props) => props.theme.fontSize};
+  color: ${(props) => props.theme.color};
 `;

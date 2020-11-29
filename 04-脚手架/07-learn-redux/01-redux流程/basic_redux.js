@@ -1,49 +1,66 @@
 // node index.js
 // 通过node执行js代码
 // node不能使用ES6导入
-
 const redux = require("redux");
 
-const initialState = {
+// store
+const store = redux.createStore(reducer);
+
+// state
+const initState = {
   counter: 0,
 };
 
+// subscribe
+store.subscribe(() => {
+  console.log("counter", store.getState());
+});
+
 // reducer
-function reducer(state = initialState, action) {
-  switch (action.type) {
+const reducer = (state = initState, action) => {
+  const { type, payload } = action;
+  switch (type) {
     case "INCREMENT":
       return { ...state, counter: state.counter + 1 };
     case "DECREMENT":
-      return { ...state, counter: state.counter - 1 };
-    case "ADD_COUNTER":
-      return { ...state, counter: state.counter + action.num };
-    case "SUB_DECREMENT":
-      return { ...state, counter: state.counter - action.num };
+      return { ...state, counter: state.counter + 1 };
+    case "ADD_NUMBER":
+      return { ...state, counter: state.counter + payload.counter };
+    case "SUB_NUMBER":
+      return { ...state, counter: state.counter - payload.counter };
 
-    // 没匹配到返回原数据
     default:
       return state;
   }
-}
+};
 
-// store (创建的时候传入reducer)
-const store = redux.createStore(reducer);
-
-// 订阅 state 修改
-store.subscribe(() => {
-  console.log("counter: ", store.getState().counter);
+// action
+const action1 = () => ({
+  type: "INCREMENT",
 });
 
-// actions
-const action1 = { type: "INCREMENT" };
-const action2 = { type: "DECREMENT" };
+const action2 = () => ({
+  type: "DECREMENT",
+});
 
-const action3 = { type: "ADD_COUNTER", num: 5 };
-const action4 = { type: "SUB_DECREMENT", num: 12 };
+const action3 = (num) => ({
+  type: "ADD_NUMBER",
+  payload: {
+    num,
+  },
+});
 
-// 派发action (执行reducer)
-store.dispatch(action1);
-store.dispatch(action2);
-store.dispatch(action2);
-store.dispatch(action3);
-store.dispatch(action4);
+const action4 = (num) => ({
+  type: "SUB_NUMBER",
+  payload: {
+    num,
+  },
+});
+
+// dispatch
+store.dispatch(action1());
+store.dispatch(action1());
+store.dispatch(action2());
+store.dispatch(action2());
+store.dispatch(action3(5));
+store.dispatch(action4(12));
