@@ -1,10 +1,6 @@
 import React, { PureComponent } from "react";
 import { connect } from "../utils/connect";
-import {
-  // changeBannerAction,
-  // changeRecommendAction,
-  getHomeMultidataAction,
-} from "../store/home/actionCreator";
+import { getHomeMultidataAction } from "../store/home/actionCreator";
 
 // import axios from "axios";
 
@@ -57,14 +53,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // 中间件后不需要
-  // changeBanner(banner) {
-  //   dispatch(changeBannerAction(banner));
-  // },
-  // changeRecommend(recommend) {
-  //   dispatch(changeRecommendAction(recommend));
-  // },
-
   // 这里传入的是函数，不再是对象了，而且不需要手动调用函数
   getHomeMultidata() {
     dispatch(getHomeMultidataAction);

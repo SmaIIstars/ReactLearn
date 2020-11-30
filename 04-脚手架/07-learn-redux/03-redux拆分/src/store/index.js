@@ -1,14 +1,10 @@
-import { createStore, applyMiddleware, compose } from "redux";
-import thunkMiddleWare from "redux-thunk";
-import reducer from "./reducer.js";
+import { createStore, applyMiddleware } from "redux";
+import thunkMiddleware from "redux-thunk";
 
-// 使用 redux_dev_tools 插件
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+import reducer from "./reducer";
 
-// 在 dispatch -> 中间件 -> reducer
-// 使用中间件 (异步操作)
-const StoreEnhancer = applyMiddleware(thunkMiddleWare);
+const storeEnhancer = applyMiddleware(thunkMiddleware);
 
-const store = createStore(reducer, composeEnhancers(StoreEnhancer));
+const store = createStore(reducer, storeEnhancer);
 
 export default store;

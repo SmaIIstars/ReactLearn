@@ -14,10 +14,5 @@ export const changeRecommendAction = (recommend) => ({
 
 // 自己会传入两个参数
 export const getHomeMultidataAction = (dispatch, getState) => {
-  // console.log("发起网络请求");
-  axios.get("http://123.207.32.32:8000/home/multidata").then((res) => {
-    const data = res.data.data;
-    dispatch(changeBannerAction(data.banner.list));
-    dispatch(changeRecommendAction(data.recommend.list));
-  });
+  console.log(1);
 };
