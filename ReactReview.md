@@ -6,11 +6,11 @@
 
 ![图例](https://cdn.jsdelivr.net/gh/smaIIstars/CDN@master/react/lifecycles.png)
 
-+ getDerivedStateFromProps: Keeping the props always is the same as New props
+- getDerivedStateFromProps: Keeping the props always is the same as New props
 
-+ shouldComponentUpdate:  We can control the components which should be re rendered
+- shouldComponentUpdate: We can control the components which should be re rendered
 
-+ getSnapshotBeforeUpdate: The snapshot before update
+- getSnapshotBeforeUpdate: The snapshot before update
 
 ```react
 // Life cycle is for class components, and function components are simulated by hooks
@@ -92,9 +92,7 @@ export default class App extends Component {
 }
 ```
 
-
-
-### shouldComponentUpdate[^shouldComponentUpdate]
+### shouldComponentUpdate[^shouldcomponentupdate]
 
 ```react
 // Use the shouldComponentUpdate controls the render function
@@ -156,11 +154,9 @@ export default class App extends Component {
 
 ```
 
-
-
 ### super
 
-+ super(props): Superclass will help you to keep the props:[^props]
+- super(props): Superclass will help you to keep the props:[^props]
 
   ```react
   import React, { Component } from "react";
@@ -168,7 +164,7 @@ export default class App extends Component {
     constructor(props) {
       super(props);
     }
-  
+
     render() {
       return (
         <div>App</div>
@@ -176,8 +172,8 @@ export default class App extends Component {
     }
   }
   ```
-  
-+ But we use super() also can run
+
+- But we use super() also can run
 
   ```react
   import React, { Component } from "react";
@@ -192,8 +188,8 @@ export default class App extends Component {
     }
   }
   ```
-  
-+ Subclass will auto execute the constructor function, we can not write it
+
+- Subclass will auto execute the constructor function, we can not write it
 
   ```react
   import React, { Component } from "react";
@@ -205,8 +201,6 @@ export default class App extends Component {
     }
   }
   ```
-  
-  
 
 ## [propTypes & defaultProps](https://zh-hans.reactjs.org/docs/typechecking-with-proptypes.html)
 
@@ -302,32 +296,30 @@ export default class App extends Component {
 }
 ```
 
-
-
-## setState[^setState]
+## setState[^setstate]
 
 - Asynchronous: In the Liefcycles and the CompositeEvent of React
 
-  [^lifecycles]:Liefcycles
-  [^reactCompositeEvent]:composite event
+  [^lifecycles]: Liefcycles
+  [^reactcompositeevent]: composite event
 
   ```react
   import React, { Component } from "react";
-  
+
   class App extends Component {
     constructor() {
       super();
-  
+
       this.state = {
         message: "default Text",
       };
     }
-  
+
     // Call back after the render function is executed
     componentDidUpdate() {
       console.log("componentDidUpdate", this.state.message); // Smallstars
     }
-  
+
     changeText() {
       this.setState(
         {
@@ -338,10 +330,10 @@ export default class App extends Component {
           console.log("changeText", this.state.message); // Smallstars
         }
       );
-  
+
       console.log("changeText", this.state.message); // default Text
     }
-  
+
     render() {
       const { message } = this.state;
       return (
@@ -358,7 +350,7 @@ export default class App extends Component {
       );
     }
   }
-  
+
   export default App;
   ```
 
@@ -366,31 +358,31 @@ export default class App extends Component {
 
   ```react
   import React, { Component } from "react";
-  
+
   class App extends Component {
     constructor() {
       super();
-  
+
       this.state = {
         message: "default Text",
       };
     }
-  
+
     componentDidMount() {
       document.getElementById("btn_synchronous").addEventListener("click", () => {
         this.setState({
           message: "Smallstars",
         });
-  
+
         console.log("document", this.state.message); // Smallstars
       });
-  
+
       // this.setState({
       //   message: "Smallstars",
       // });
       // console.log("componentDidMount", this.state.message); // default Text
     }
-  
+
     changeText() {
       setTimeout(() => {
         this.setState({
@@ -398,13 +390,13 @@ export default class App extends Component {
         });
         console.log("setTimeout", this.state.message); // default Text
       }, 0);
-  
+
       this.setState({
         message: "Smallstars",
       });
       console.log("changeText", this.state.message); // default Text
     }
-  
+
     render() {
       const { message } = this.state;
       return (
@@ -422,26 +414,26 @@ export default class App extends Component {
       );
     }
   }
-  
+
   export default App;
   ```
-  
-- Data merging[^setStateMerging]
+
+- Data merging[^setstatemerging]
 
   ```react
   import React, { Component } from "react";
-  
+
   export default class App extends Component {
     constructor(props) {
       super();
       this.props = props;
-  
+
       this.state = {
         message: "Default Text",
         name: "Smallstars",
       };
     }
-  
+
     render() {
       return (
         <div>
@@ -457,7 +449,7 @@ export default class App extends Component {
         </div>
       );
     }
-  
+
     changeText() {
       // Use Object.assign({}, this.state, {message: "Smallstars"})
       this.setState({
@@ -467,21 +459,21 @@ export default class App extends Component {
   }
   ```
 
-- setState merging[^setStateMerging]
+- setState merging[^setstatemerging]
 
   ```react
   import React, { Component } from "react";
-  
+
   export default class App extends Component {
     constructor(props) {
       super();
       this.props = props;
-  
+
       this.state = {
         counter: 0,
       };
     }
-  
+
     render() {
       return (
         <div>
@@ -496,22 +488,22 @@ export default class App extends Component {
         </div>
       );
     }
-  
+
     increment() {
       // It is merged each time, and the front is covered by later
       // this.setState({
       //   counter: this.state.counter + 1,
       // });
-  
+
       // this.setState({
       //   counter: this.state.counter + 1,
       // });
-  
+
       // this.setState({
       //   counter: this.state.counter + 1,
       // });
       // couter is 1
-  
+
       //Accumulate when meraging
       // Each time a meraging is made, the later state is used for accumulation, and then a new one is returned
       this.setState((prevState, props) => {
@@ -534,15 +526,11 @@ export default class App extends Component {
   }
   ```
 
-  
-
 ## ReactCompositeEvent
 
-React is not just design for browsers[^reactCompositeEvent]
+React is not just design for browsers[^reactcompositeevent]
 
 ![](https://cdn.jsdelivr.net/gh/smaIIstars/CDN@master/react/reactCompositeEvent.png)
-
-
 
 ## Components Communication
 
@@ -562,7 +550,7 @@ React is not just design for browsers[^reactCompositeEvent]
       );
     }
   }
-  
+
   export default class App extends Component {
     render() {
       return (
@@ -579,17 +567,17 @@ React is not just design for browsers[^reactCompositeEvent]
 
   ```react
   import React, { Component } from "react";
-  
+
   function ChildCpn(props) {
     const { name, age, height } = props;
-  
+
     return (
       <div>
         <h2>Subclass:{name + " " + age + " " + height}</h2>
       </div>
     );
   }
-  
+
   export default class App extends Component {
     render() {
       return (
@@ -601,15 +589,13 @@ React is not just design for browsers[^reactCompositeEvent]
   }
   ```
 
-
-
 ### Cross Components Communication
 
 - Props are passed layer by layer
 
   ```react
   import React, { Component } from "react";
-  
+
   const ProfileHeader = (props) => {
     const { nickname, age } = props;
     return (
@@ -619,27 +605,27 @@ React is not just design for browsers[^reactCompositeEvent]
       </div>
     );
   };
-  
+
   const Profile = (props) => {
     const { nickname, age } = props;
-  
+
     return (
       <div>
         <ProfileHeader nickname={nickname} age={age} />
       </div>
     );
   };
-  
+
   class App extends Component {
     constructor(props) {
       super();
-  
+
       this.state = {
         nickname: "Smallstars",
         age: 18,
       };
     }
-  
+
     render() {
       const { nickname, age } = this.state;
       return (
@@ -649,7 +635,7 @@ React is not just design for browsers[^reactCompositeEvent]
       );
     }
   }
-  
+
   export default App;
   ```
 
@@ -658,13 +644,13 @@ React is not just design for browsers[^reactCompositeEvent]
   ```react
   // Class Component
   import React, { Component } from "react";
-  
+
   // First, create the context object
   const UserContext = React.createContext({
     nickname: "defaultName",
     level: 0,
   });
-  
+
   class ProfileHeader extends Component {
     render() {
       // console.log("ProfileHeader", this);
@@ -677,7 +663,7 @@ React is not just design for browsers[^reactCompositeEvent]
       );
     }
   }
-  
+
   class Profile extends Component {
     render() {
       // console.log("Profile", this);
@@ -690,10 +676,10 @@ React is not just design for browsers[^reactCompositeEvent]
       );
     }
   }
-  
+
   // Fourth, get the shared data
   ProfileHeader.contextType = UserContext;
-  
+
   export default class App extends Component {
     constructor() {
       super();
@@ -702,7 +688,7 @@ React is not just design for browsers[^reactCompositeEvent]
         level: 10,
       };
     }
-  
+
     render() {
       return (
         <>
@@ -717,20 +703,20 @@ React is not just design for browsers[^reactCompositeEvent]
       );
     }
   }
-  
+
   // Function Component
   import React, { createContext } from "react";
-  
+
   // First, create the context
   const UserContext = createContext({
     nickname: "defaultName",
     level: 0,
   });
-  
+
   const ThemeContext = createContext({
     red: "red",
   });
-  
+
   const ProfileHeader = () => {
     return (
       // Fourth, user the Consumer and call the function pass in the value
@@ -757,7 +743,7 @@ React is not just design for browsers[^reactCompositeEvent]
       </UserContext.Consumer>
     );
   };
-  
+
   const Profile = () => {
     return (
       <div>
@@ -765,13 +751,13 @@ React is not just design for browsers[^reactCompositeEvent]
       </div>
     );
   };
-  
+
   const App = () => {
     const user = {
       nickname: "smallstars",
       level: 100,
     };
-  
+
     return (
       // Second, sharing the data
       <UserContext.Provider value={user}>
@@ -782,7 +768,7 @@ React is not just design for browsers[^reactCompositeEvent]
       </UserContext.Provider>
     );
   };
-  
+
   export default App;
   ```
 
@@ -790,37 +776,37 @@ React is not just design for browsers[^reactCompositeEvent]
 
   ```react
   import React, { PureComponent } from "react";
-  
+
   import { EventEmitter } from "events";
-  
+
   // Event bus
   const eventBus = new EventEmitter();
-  
+
   class Home extends PureComponent {
     // addListener
     componentDidMount() {
       eventBus.addListener("btnClick", this.handleBtnClickListener);
     }
-  
+
     // removeListener
     componentWillUnmount() {
       // remove all event listener about btnClick
       // eventBus.removeListener("btnClick")
-  
+
       // Only one needs to be cancelled separately
       // and there use the ... operator
       eventBus.removeListener("btnClick", this.handleBtnClickListener);
     }
-  
+
     handleBtnClickListener = (message, num) => {
       console.log(message, num);
     };
-  
+
     render() {
       return <div>Home</div>;
     }
   }
-  
+
   class Profile extends PureComponent {
     render() {
       return (
@@ -836,13 +822,13 @@ React is not just design for browsers[^reactCompositeEvent]
         </div>
       );
     }
-  
+
     btnClick() {
       // emit the event
       eventBus.emit("btnClick", "HelloWorld", 123);
     }
   }
-  
+
   export default class App extends PureComponent {
     render() {
       return (
@@ -855,10 +841,7 @@ React is not just design for browsers[^reactCompositeEvent]
   }
   ```
 
-
 - Redux[^redux]
-
-
 
 ## Ref
 
@@ -946,17 +929,15 @@ class App extends PureComponent {
 export default App;
 ```
 
-
-
 ## Controlled & Uncontrolled Components
 
 Data is handle by a React Component ? Controlled : Uncontrolled
 
-- Controlled Components: The values in the components are always consistent with the state 
+- Controlled Components: The values in the components are always consistent with the state
 
   ```react
   import React, { PureComponent } from "react";
-  
+
   class App extends PureComponent {
     constructor() {
       super();
@@ -965,19 +946,19 @@ Data is handle by a React Component ? Controlled : Uncontrolled
         counter: 5,
       };
     }
-  
+
     changeHandle(e) {
       // console.log(e.target.value);
       this.setState({
         message: e.target.value,
       });
     }
-  
+
     submitHandle(e) {
       e.preventDefault();
       console.log(this.state.message);
     }
-  
+
     render() {
       const { message } = this.state;
       return (
@@ -1003,7 +984,7 @@ Data is handle by a React Component ? Controlled : Uncontrolled
       );
     }
   }
-  
+
   export default App;
   ```
 
@@ -1011,7 +992,7 @@ Data is handle by a React Component ? Controlled : Uncontrolled
   sequenceDiagram
   	participant s as state
   	participant c as components
-  	
+
       s->>c:DefaultValue
   	loop One Way Data Flaw
           c->>c:ChangeValue
@@ -1024,15 +1005,15 @@ Data is handle by a React Component ? Controlled : Uncontrolled
 
   ```react
   import React, { createRef, PureComponent } from "react";
-  
+
   export default class App extends PureComponent {
     constructor(props) {
       super();
-  
+
       this.state = {
         username: "",
       };
-  
+
       this.usernameRef = createRef();
     }
     render() {
@@ -1052,23 +1033,19 @@ Data is handle by a React Component ? Controlled : Uncontrolled
                 ref={this.usernameRef}
               />
             </label>
-  
+
             <input type="submit" value="submit" />
           </form>
         </div>
       );
     }
-  
+
     handleSubmit(event) {
       event.preventDefault();
       console.log(this.usernameRef.current.value);
     }
   }
   ```
-
-  
-
-
 
 ## Higher-Order Components (HOC)
 
@@ -1116,30 +1093,28 @@ const EnhanceComponent2 = (WrappedComponent) => {
 export default EnhanceComponent(App);
 ```
 
-
-
 ## React-CSS
 
 - Inline Style
 
   ```react
   import React, { PureComponent } from "react";
-  
+
   export default class App extends PureComponent {
     constructor(porps) {
       super();
-  
+
       this.state = {
         color: "purple",
       };
     }
-  
+
     render() {
       const pStyle = {
         color: this.state.color,
         textDecoration: "underline",
       };
-  
+
       return (
         <div>
           <h2 style={{ fontSize: "50px", color: "red" }}>Title</h2>
@@ -1157,15 +1132,15 @@ export default EnhanceComponent(App);
   .title{
     color: xxx;
   }
-  
+
   // App.js
   import React, { memo } from "react";
   import Home from "../home";
   import Profile from "../profile";
-  
+
   // Import in this way will pollution whole situation
   // import "./style.css";
-  
+
   // We should import file as a module
   // first: style.css --> style.module.css
   // second: xxxStyle <-- style.module.css
@@ -1183,11 +1158,11 @@ export default EnhanceComponent(App);
     );
   });
   export default index;
-  
+
   // Home.js
   import React, { memo } from "react";
   import homeStyle from "./style.module.css";
-  
+
   const index = memo(function index(props) {
     return (
       <div>
@@ -1197,11 +1172,11 @@ export default EnhanceComponent(App);
     );
   });
   export default index;
-  
+
   // Profile.js
   import React, { memo } from "react";
   import profileStyle from "./style.module.css";
-  
+
   const index = memo(function index(props) {
     return (
       <div>
@@ -1212,17 +1187,17 @@ export default EnhanceComponent(App);
   });
   export default index;
   ```
-  
+
 - styled-components
 
-  Use the principal of Label Template String[^labelTemplateString]
+  Use the principal of Label Template String[^labeltemplatestring]
 
   ```react
   // Basic Usage
   // index.js
   import React, { memo } from "react";
   import { HomeWrapper, TitleWrapper } from "./style";
-  
+
   const index = memo(function index(props) {
     return (
       <HomeWrapper>
@@ -1236,14 +1211,14 @@ export default EnhanceComponent(App);
     );
   });
   export default index;
-  
+
   // style.js
   import styled from "styled-components";
-  
+
   export const HomeWrapper = styled.div`
     font-size: 20px;
     color: red;
-  
+
     .banner {
       background-color: blue;
       span {
@@ -1260,7 +1235,7 @@ export default EnhanceComponent(App);
       }
     }
   `;
-  
+
   // Use the theme props
   export const TitleWrapper = styled.h2`
     text-decoration: underline;
@@ -1268,7 +1243,7 @@ export default EnhanceComponent(App);
     color: ${(props) => props.theme.color};
   `;
   ```
-  
+
   ```react
   // index.js
   import React, { PureComponent } from "react";
@@ -1284,7 +1259,7 @@ export default EnhanceComponent(App);
         textColor: "blue",
       };
     }
-  
+
     render() {
       return (
         <div>
@@ -1296,12 +1271,12 @@ export default EnhanceComponent(App);
       );
     }
   }
-  
+
   export default index;
-  
+
   // style.js
   import styled from "styled-components";
-  
+
   // attrs function can set some default value
   export const SSInput = styled.input.attrs({
     placeholder: "SmallStars",
@@ -1311,7 +1286,7 @@ export default EnhanceComponent(App);
     color: ${(props) => props.textColor};
   `;
   ```
-  
+
   ```react
   // Style Hiheritance and Theme Props Shared
   // index.js
@@ -1334,10 +1309,10 @@ export default EnhanceComponent(App);
     );
   });
   export default index;
-  
+
   // style.js
   import styled from "styled-components";
-  
+
   export const Button = styled.button`
     padding: 10px 20px;
     color: red;
@@ -1350,11 +1325,9 @@ export default EnhanceComponent(App);
   `;
   ```
 
-
-
 ## Redux
 
-[^redux]:redux
+[^redux]: redux
 
 - Single Data Source
   - All states is stored in an Object Tree, and the Object Tree is stored in only one store
@@ -1368,34 +1341,34 @@ export default EnhanceComponent(App);
 ```mermaid
 sequenceDiagram
 	participant v as view
-	participant r as reducer	
+	participant r as reducer
 	participant s as state
-	
+
 	v->>r: dispatch(action)
 	r->>s: change state
 	s->>s: Shallow comparison and Update
 	s->>v: call render() to update view
 ```
 
--  Basic Usage 
+- Basic Usage
 
   ```react
   // node index.js
   const redux = require("redux");
-  
+
   // store
   const store = redux.createStore(reducer);
-  
+
   // state
   const initState = {
     counter: 0,
   };
-  
+
   // subscribe
   store.subscribe(() => {
     console.log("counter", store.getState().counter);
   });
-  
+
   // reducer
   const reducer = (state = initState, action) => {
     const { type, payload } = action;
@@ -1408,35 +1381,35 @@ sequenceDiagram
         return { ...state, counter: state.counter + payload.counter };
       case "SUB_NUMBER":
         return { ...state, counter: state.counter - payload.counter };
-  
+
       default:
         return state;
     }
   };
-  
+
   // action
   const action1 = () => ({
     type: "INCREMENT",
   });
-  
+
   const action2 = () => ({
     type: "DECREMENT",
   });
-  
+
   const action3 = (num) => ({
     type: "ADD_NUMBER",
     payload: {
       num,
     },
   });
-  
+
   const action4 = (num) => ({
     type: "SUB_NUMBER",
     payload: {
       num,
     },
   });
-  
+
   // dispatch
   store.dispatch(action1());
   store.dispatch(action1());
@@ -1459,33 +1432,33 @@ sequenceDiagram
    *         index.js
    *         reducer.js
    */
-  
+
   // store
   // index.js
   import redux from "redux";
   import reducer from "./reducer.js";
   const store = redux.createStore(reducer);
   export default store;
-  
+
   // actionCreator.js
   import { ADD_NUMBER, SUB_NUMBER } from "./constants.js";
-  
+
   export const addAction = (num) => ({
     type: ADD_NUMBER,
     num,
   });
-  
+
   export const subAction = (num) => ({
     type: SUB_NUMBER,
     num,
   });
-  
+
   // reducer.js
   import { ADD_NUMBER, SUB_NUMBER } from "./constants.js";
   const defaultState = {
     counter: 0,
   };
-  
+
   function reducer(state = defaultState, action) {
     switch (action.type) {
       case ADD_NUMBER:
@@ -1496,17 +1469,17 @@ sequenceDiagram
         return state;
     }
   }
-  
+
   export default reducer;
-  
+
   // index.js
   import store from "./store/index.js";
   import { addAction, subAction } from "./store/actionCreator.js";
-  
+
   store.subscribe(() => {
     console.log(store.getState());
   });
-  
+
   store.dispatch(addAction(10));
   store.dispatch(addAction(15));
   store.dispatch(addAction(10));
@@ -1514,8 +1487,6 @@ sequenceDiagram
   store.dispatch(subAction(3));
   store.dispatch(subAction(1));
   ```
-
-
 
 ## Connect(HOC)
 
@@ -1647,8 +1618,6 @@ ReactDOM.render(
 
 ```
 
-
-
 ## Middleware
 
 - redux-thunk
@@ -1665,7 +1634,7 @@ ReactDOM.render(
       dispatch(getHomeMultidataAction);
     },
   });
-  
+
   // actionCreator.js
   import axios from "axios";
   import { CHANGE_BANNER, CHANGE_RECOMMEND } from "./constants.js";
@@ -1683,7 +1652,7 @@ ReactDOM.render(
     });
     // console.log(getState());
   };
-  
+
   // reducer.js
   import { CHANGE_BANNER, CHANGE_RECOMMEND } from "./constants.js";
   // home
@@ -1703,7 +1672,7 @@ ReactDOM.render(
   }
   export default homeReducer;
   ```
-  
+
 - redux-saga
 
   ```react
@@ -1721,13 +1690,13 @@ ReactDOM.render(
   // generator Function
   sagaMiddleware.run(mySaga);
   export default store;
-  
+
   // saga.js
   import axios from "axios";
   import { all, put, takeEvery } from "redux-saga/effects";
   import { FETCH_GET_MULTIDATA } from "./constants";
   import { changeBannerAction, changeRecommendAction } from "./actionCreator";
-  
+
   function* fetchGetMultidata(action) {
     const {
       data: { data },
@@ -1746,12 +1715,12 @@ ReactDOM.render(
     yield takeEvery(FETCH_GET_MULTIDATA, fetchGetMultidata);
   }
   export default mySaga;
-  
+
   // actionCreator.js
   export const fetchGetMultidataAction = () => ({
     type: FETCH_GET_MULTIDATA,
   });
-  
+
   // App.js
   const mapDispatchToProps = (dispatch) => ({
     // Pass in an object
@@ -1761,16 +1730,6 @@ ReactDOM.render(
   });
   ```
 
-  
-
-  
-
-
-
-
-
-
-
 ## Source Code
 
 - props
@@ -1778,7 +1737,7 @@ ReactDOM.render(
   [^props]: Component will help us to assign the props and props are assigned manually
 
   ```react
-  // Component will help us to assign the props 
+  // Component will help us to assign the props
   // node_modules\react\cjs\react.development.js
     function Component(props, context, updater) {
       this.props = props;
@@ -1787,65 +1746,63 @@ ReactDOM.render(
       // renderer.
       this.updater = updater || ReactNoopUpdateQueue;
     }
-    
+
   //props are assigned manually
   // react-test-renderer-shallow
   _proto2._reset = function _reset() {
       this._context = null;		// get the context
-      this._element = null;		// if the label is a normal HTML tag 
+      this._element = null;		// if the label is a normal HTML tag
       this._instance = null;	// if the label is a component
       //...
   };
   // get the type of element
   var elementType = reactIs.isMemo(element) ? element.type.type : element.type;
-  
+
   // determine whether elementType is a construct
   if (shouldConstruct(elementType)) {
       // the elementType is the passed in component, but there is still no props here
       this._instance = new elementType(element.props, this._context, this._updater);
-  
+
       //...
       this._mountClassComponent(elementType, element, this._context);
   }
-  
+
   // in this function, props are assigned manually
   _proto2._mountClassComponent = function _mountClassComponent(elementType, element, context) {
       this._instance.context = context;		// Assign the value to the context of _instance
       this._instance.props = element.props;	// Assign the value to the props of _instance
       this._instance.state = this._instance.state || null;
       this._instance.updater = this._updater;
-  
-      // The overridden lifecycles function will be called here  
+
+      // The overridden lifecycles function will be called here
       if (typeof this._instance.UNSAFE_componentWillMount === 'function' || typeof this._instance.componentWillMount === 'function') {
           var beforeState = this._newState; // In order to support react-lifecycles-compat polyfilled components,
           // Unsafe lifecycles should not be invoked for components using the new APIs.
-  
+
           if (typeof elementType.getDerivedStateFromProps !== 'function' && typeof this._instance.getSnapshotBeforeUpdate !== 'function') {
               if (typeof this._instance.componentWillMount === 'function') {
                   this._instance.componentWillMount();
               }
-  
+
               if (typeof this._instance.UNSAFE_componentWillMount === 'function') {
                   this._instance.UNSAFE_componentWillMount();
               }
           } // setState may have been called during cWM
-  
+
           if (beforeState !== this._newState) {
               this._instance.state = this._newState || emptyObject;
           }
       }
-  
-      // props are assigined before the render function is executed 
+
+      // props are assigined before the render function is executed
       this._rendered = this._instance.render(); // Intentionally do not call componentDidMount()
       // because DOM refs are not available.
   };
   ```
 
-  
-
 - createElement
 
-  [^createElement]:createElement
+  [^createelement]: createElement
 
   ```react
   // node_modules\react\cjs\react.development.js
@@ -1861,7 +1818,7 @@ ReactDOM.render(
     var ref = null;
     var self = null;
     var source = null;
-  
+
     // keeping the configs
     if (config != null) {
       if (hasValidRef(config)) {
@@ -1870,14 +1827,14 @@ ReactDOM.render(
           warnIfStringRefCannotBeAutoConverted(config);
         }
       }
-  
+
       if (hasValidKey(config)) {
         key = '' + config.key;
       }
-  
+
       self = config.__self === undefined ? null : config.__self;
       source = config.__source === undefined ? null : config.__source; // Remaining properties are added to a new props object
-  
+
       for (propName in config) {
         if (hasOwnProperty.call(config, propName) && !RESERVED_PROPS.hasOwnProperty(propName)) {
           props[propName] = config[propName];
@@ -1885,8 +1842,8 @@ ReactDOM.render(
       }
     } // Children can be more than one argument, and those are transferred onto
     // the newly allocated props object.
-  
-    
+
+
     var childrenLength = arguments.length - 2;
     // get the child
     if (childrenLength === 1) {
@@ -1897,7 +1854,7 @@ ReactDOM.render(
       for (var i = 0; i < childrenLength; i++) {
         childArray[i] = arguments[i + 2];
       }
-  
+
       {
         // Cannot modify the value of the object after Object.freeze(object)
         if (Object.freeze) {
@@ -1906,17 +1863,15 @@ ReactDOM.render(
       }
       props.children = childArray;
     } // Resolve default props
-  
+
     //...
     return ReactElement(type, key, ref, self, source, ReactCurrentOwner.current, props);
   }
   ```
 
-  
-
 - setState
 
-  [^setState]:setState
+  [^setstate]: setState
 
   ```react
   // node_modules\react\cjs\react.development.js
@@ -1924,21 +1879,21 @@ ReactDOM.render(
   Component.prototype.setState = function (partialState, callback) {
     this.updater.enqueueSetState(this, partialState, callback, 'setState');
   };
-  
+
   // react-reconciler\src\ReactFiberClassComponent.js
   // classComponentUpdater function
   const classComponentUpdater={
       enqueueSetState(inst, payload, callback) {
       const fiber = getInstance(inst);
-      const currentTime = requestCurrentTime();	// return the different time accroding the different context 
+      const currentTime = requestCurrentTime();	// return the different time accroding the different context
       										// like composite Event and setTimeout is different context
       const suspenseConfig = requestCurrentSuspenseConfig()
       const expirationTime = computeExpirationForFiber(currentTime, fiber, suspenseConfig); // get the expiration time
       //...
     }
   }
-  
-  
+
+
   // computeExpirationForFiber function
   function computeExpirationForFiber(currentTime, fiber, suspenseConfig) {
     //...
@@ -1949,11 +1904,9 @@ ReactDOM.render(
   }
   ```
 
-  
-
 - setStateMerging
 
-  [^setStateMerging]:Put all setState in the update queue, use the Object.assign() merge the value
+  [^setstatemerging]: Put all setState in the update queue, use the Object.assign() merge the value
 
   ```react
   // Data Merging
@@ -1971,7 +1924,7 @@ ReactDOM.render(
       pending.next = update;
     }
     // ...
-  
+
     // setState Merging
     do {
         //...
@@ -1985,20 +1938,20 @@ ReactDOM.render(
             instance,
           )
         // ...
-        // Merging the setState use do while structure 
+        // Merging the setState use do while structure
         update = update.next;
     } while (true);
     // ...
     sharedQueue.pending = update;
   }
-  
+
   // getStateFromUpdate function return a newState
   case UpdateState: {
     // ...
     // Merge the partial state and the previous state.
     return Object.assign({}, prevState, partialState);
   }
-  
+
   // pass in function
   case UpdateState: {
     // ...
@@ -2015,11 +1968,9 @@ ReactDOM.render(
   }
   ```
 
-  
-
 - shouldComponentUpdate
 
-  [^shouldComponentUpdate]: Component & PureComponent
+  [^shouldcomponentupdate]: Component & PureComponent
 
   ```react
   // packages\react-reconciler\src\ReactFiberClassComponent.js
@@ -2044,36 +1995,34 @@ ReactDOM.render(
   	// ...
       return shouldUpdate;
     }
-  
+
     // If it's PureReactComponent, shallow comparison is made
     if (ctor.prototype && ctor.prototype.isPureReactComponent) {
       return (
         !shallowEqual(oldProps, newProps) || !shallowEqual(oldState, newState)
       );
     }
-  
+
     // default return true
     return true;
   }
-  
+
   // packages\react\src\ReactBaseClasses.js
   Component.prototype.isReactComponent = {};
   const pureComponentPrototype = (PureComponent.prototype = new ComponentDummy());
   pureComponentPrototype.isPureReactComponent = true;
   ```
 
-  
-
 - shallowEqual
 
-  [^shallowEqual]: shallow equal function
+  [^shallowequal]: shallow equal function
 
   ```react
   function shallowEqual(objA: mixed, objB: mixed): boolean {
     if (is(objA, objB)) {
       return true;
     }
-  
+
     if (
       typeof objA !== 'object' ||
       objA === null ||
@@ -2082,14 +2031,14 @@ ReactDOM.render(
     ) {
       return false;
     }
-  
+
     const keysA = Object.keys(objA);
     const keysB = Object.keys(objB);
-  
+
     if (keysA.length !== keysB.length) {
       return false;
     }
-  
+
     // Test for A's keys different from B.
     for (let i = 0; i < keysA.length; i++) {
       if (
@@ -2099,7 +2048,7 @@ ReactDOM.render(
         return false;
       }
     }
-  
+
     return true;
   }
   ```
@@ -2108,27 +2057,24 @@ ReactDOM.render(
 
 ## Label Template String
 
-[^labelTemplateString]:How to use
+[^labeltemplatestring]: How to use
 
 ```html
 <script>
-    const name = "SmallStars";
-    const age = 18;
-    const message = `my name is ${name}`;
+  const name = "SmallStars";
+  const age = 18;
+  const message = `my name is ${name}`;
 
-    function test(...args) {
-        console.log(args);
-    }
+  function test(...args) {
+    console.log(args);
+  }
 
-    console.log(message);
-    test("aaa", "bbb");
-    
-    // it splits the string
-    // [Array(3), "SmallStars", 18]
-    // ["my name is ", ", my age is ", "", raw: Array(3)]
-    test`my name is ${name}, my age is ${age}`; 
+  console.log(message);
+  test("aaa", "bbb");
+
+  // it splits the string
+  // [Array(3), "SmallStars", 18]
+  // ["my name is ", ", my age is ", "", raw: Array(3)]
+  test`my name is ${name}, my age is ${age}`;
 </script>
 ```
-
-
-
