@@ -1,6 +1,10 @@
 import axios from "axios";
 
-import { CHANGE_BANNER, CHANGE_RECOMMEND } from "./constants.js";
+import {
+  CHANGE_BANNER,
+  CHANGE_RECOMMEND,
+  FETCH_GET_MULTIDATA,
+} from "./constants.js";
 
 export const changeBannerAction = (banner) => ({
   type: CHANGE_BANNER,
@@ -14,5 +18,18 @@ export const changeRecommendAction = (recommend) => ({
 
 // 自己会传入两个参数
 export const getHomeMultidataAction = (dispatch, getState) => {
-  console.log(1);
+  // console.log(getState());
+  axios({
+    url: "http://123.207.32.32:8000/home/multidata",
+  }).then((res) => {
+    const { data } = res.data;
+    // console.log(data);
+    dispatch(changeBannerAction(data.banner.list));
+    dispatch(changeRecommendAction(data.recommend.list));
+  });
 };
+
+// saga
+export const fetchGetMultidataAction = () => ({
+  type: FETCH_GET_MULTIDATA,
+});

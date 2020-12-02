@@ -1,6 +1,9 @@
 import React, { PureComponent } from "react";
 import { connect } from "../utils/connect";
-import { getHomeMultidataAction } from "../store/home/actionCreator";
+import {
+  getHomeMultidataAction,
+  fetchGetMultidataAction,
+} from "../store/home/actionCreator";
 
 // import axios from "axios";
 
@@ -15,6 +18,7 @@ class Network extends PureComponent {
     // });
 
     this.props.getHomeMultidata();
+    this.props.fetchGetMultidata();
   }
 
   render() {
@@ -56,6 +60,10 @@ const mapDispatchToProps = (dispatch) => ({
   // 这里传入的是函数，不再是对象了，而且不需要手动调用函数
   getHomeMultidata() {
     dispatch(getHomeMultidataAction);
+  },
+
+  fetchGetMultidata() {
+    dispatch(fetchGetMultidataAction());
   },
 });
 
